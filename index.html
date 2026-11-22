@@ -1,0 +1,1970 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profil Program Studi Informatika - Universitas Nasional</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* === Variabel Warna & Font === */
+        :root {
+            --primary: #334155; 
+            --secondary: #475569; 
+            --accent: #2563eb; 
+            --accent-hover: #1d4ed8;
+            --bg-color: #0f172a;
+            --card-bg: rgba(30, 41, 59, 0.85);
+            --text-dark: #f8fafc;
+            --text-light: #f1f5f9;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--bg-color);
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* === Navigasi === */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--text-light);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-shrink: 0;
+        }
+
+        .logo i { color: var(--accent); }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .nav-links li a {
+            text-decoration: none;
+            color: #94a3b8;
+            font-weight: 500;
+            padding: 8px 12px;
+            border-radius: 6px;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.95rem;
+        }
+
+        .nav-links li a:hover, .nav-links li a.active {
+            background-color: rgba(37, 99, 235, 0.2);
+            color: #60a5fa;
+        }
+
+        /* === Area Kanan (Login, Profil & Mobile Menu) === */
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-shrink: 0;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: rgba(30, 41, 59, 0.9);
+            border: 1px solid #334155;
+            border-radius: 8px;
+            font-size: 1.35rem;
+            color: var(--text-light);
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .user-menu-container {
+            position: relative;
+            display: none; 
+            align-items: center;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            background-color: var(--accent);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.15rem;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(37, 99, 235, 0.3);
+            transition: var(--transition);
+            user-select: none;
+        }
+
+        .user-avatar:hover { transform: scale(1.08); }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 130%;
+            right: 0;
+            background: #1e293b;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            border-radius: 8px;
+            padding: 10px;
+            min-width: 150px;
+            display: flex;
+            flex-direction: column;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+            border: 1px solid #334155;
+            z-index: 1100;
+        }
+
+        .dropdown-menu.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-item {
+            background: transparent;
+            border: none;
+            color: #f87171; 
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-radius: 6px;
+            transition: var(--transition);
+            width: 100%;
+        }
+
+        .dropdown-item:hover { background-color: rgba(239, 68, 68, 0.15); }
+
+        /* === Struktur Section dengan Animasi Pembatas Berkilau === */
+        section {
+            padding: 110px 5% 80px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+            position: relative;
+            overflow: hidden;
+        }
+
+        section::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+            animation: shimmerBorder 3s infinite linear;
+            z-index: 5;
+        }
+
+        @keyframes shimmerBorder {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .section-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .section-title, .section-subtitle, .hero-content, .horizontal-scroll, .contact-container, .task-manager-wrapper {
+            position: relative;
+            z-index: 2;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.2rem;
+            color: var(--text-light);
+            margin-bottom: 12px;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: #94a3b8;
+            font-size: 1rem;
+            max-width: 650px;
+            margin: 0 auto 35px;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background-color: var(--accent);
+            margin: 10px auto 0;
+            border-radius: 2px;
+        }
+
+        /* === Beranda === */
+        #beranda {
+            text-align: center;
+            align-items: center;
+        }
+
+        .hero-content { max-width: 750px; width: 100%; }
+        .hero-title { font-size: 3rem; color: var(--text-light); margin-bottom: 20px; }
+        .hero-subtitle { font-size: 1.2rem; color: #94a3b8; margin-bottom: 30px; }
+        .hero-actions { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; }
+
+        /* === Layout Horizontal Scroll & Kartu Potret === */
+        .horizontal-scroll {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            gap: 25px;
+            padding-bottom: 30px;
+            padding-top: 10px;
+            scrollbar-width: thin;
+            scrollbar-color: #334155 transparent;
+            align-items: stretch;
+        }
+
+        .horizontal-scroll::-webkit-scrollbar { height: 8px; }
+        .horizontal-scroll::-webkit-scrollbar-thumb {
+            background-color: #475569;
+            border-radius: 10px;
+        }
+
+        .scroll-card {
+            min-width: 280px; 
+            max-width: 300px; 
+            scroll-snap-align: start;
+            background: var(--card-bg);
+            backdrop-filter: blur(8px);
+            padding: 35px 25px;
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: var(--transition);
+            flex: 0 0 auto;
+            display: flex;
+            flex-direction: column; 
+            height: auto; 
+        }
+
+        .scroll-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(37, 99, 235, 0.2);
+            border-color: var(--accent);
+        }
+
+        .scroll-card i { font-size: 2.8rem; color: #60a5fa; margin-bottom: 20px; }
+        .scroll-card h3 { font-size: 1.3rem; margin-bottom: 15px; color: var(--text-light); }
+        .scroll-card p { font-size: 1rem; color: #cbd5e1; flex-grow: 1; }
+        .card-center { text-align: center; align-items: center; }
+
+        /* === STUDENT TASK MANAGER === */
+        #tugas {
+            padding: 84px 5% 36px;
+            min-height: 100vh;
+            justify-content: center;
+        }
+
+        #tugas .section-title {
+            font-size: 1.65rem;
+            margin-bottom: 4px;
+        }
+
+        #tugas .section-subtitle {
+            font-size: 0.85rem;
+            margin: 0 auto 12px;
+        }
+
+        .task-manager-wrapper {
+            max-width: 960px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .auth-notice-banner {
+            background: rgba(245, 158, 11, 0.15);
+            border: 1px solid rgba(245, 158, 11, 0.45);
+            color: #fde68a;
+            padding: 8px 12px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            flex-wrap: wrap;
+            font-size: 0.82rem;
+        }
+
+        .auth-notice-text {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .auth-notice-text i { color: #fbbf24; flex-shrink: 0; }
+
+        .task-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+
+        .stat-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(8px);
+            padding: 9px 14px;
+            border-radius: 9px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.2);
+            transition: var(--transition);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-2px);
+            border-color: rgba(96, 165, 250, 0.4);
+        }
+
+        .stat-info h4 {
+            color: #94a3b8;
+            font-size: 0.76rem;
+            font-weight: 500;
+            margin-bottom: 1px;
+        }
+
+        .stat-info .stat-number {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-light);
+            line-height: 1.1;
+        }
+
+        .stat-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.95rem;
+        }
+
+        .stat-total .stat-icon { background: rgba(37, 99, 235, 0.2); color: #60a5fa; }
+        .stat-pending .stat-icon { background: rgba(245, 158, 11, 0.2); color: #fbbf24; }
+        .stat-done .stat-icon { background: rgba(16, 185, 129, 0.2); color: #34d399; }
+
+        .task-main-grid {
+            display: grid;
+            grid-template-columns: 295px 1fr;
+            gap: 14px;
+            align-items: start;
+        }
+
+        .task-form-card, .task-list-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(8px);
+            padding: 14px 16px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+            position: relative;
+        }
+
+        .task-form-card.locked { opacity: 0.85; }
+
+        .task-form-card h3 {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            margin-bottom: 9px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 6px;
+            border-bottom: 1px solid #334155;
+            padding-bottom: 6px;
+        }
+
+        .lock-pill {
+            font-size: 0.68rem;
+            background: rgba(245, 158, 11, 0.2);
+            color: #fbbf24;
+            padding: 2px 7px;
+            border-radius: 10px;
+            border: 1px solid rgba(245, 158, 11, 0.4);
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        #taskForm .form-group { margin-bottom: 7px; }
+        #taskForm .form-group label { margin-bottom: 2px; font-size: 0.78rem; }
+        #taskForm .form-control { padding: 6px 9px; font-size: 0.82rem; border-radius: 6px; }
+
+        .form-error {
+            color: #f87171;
+            font-size: 0.72rem;
+            margin-top: 2px;
+            display: none;
+        }
+
+        .form-control.invalid {
+            border-color: var(--danger);
+            box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.25);
+        }
+
+        .form-control:disabled { opacity: 0.55; cursor: not-allowed; }
+        .form-btn-group { display: flex; gap: 6px; margin-top: 8px; }
+        #taskForm .btn { padding: 8px 12px; font-size: 0.84rem; }
+
+        .task-toolbar {
+            display: grid;
+            grid-template-columns: 1fr 125px 125px;
+            gap: 8px;
+            margin-bottom: 10px;
+        }
+
+        .task-toolbar .form-control { padding: 6px 9px; font-size: 0.82rem; border-radius: 6px; }
+
+        .search-box { position: relative; }
+        .search-box i {
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #94a3b8;
+            font-size: 0.78rem;
+        }
+        .search-box input { padding-left: 30px; }
+
+        .task-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            max-height: 245px;
+            overflow-y: auto;
+            padding-right: 3px;
+        }
+
+        .task-list::-webkit-scrollbar { width: 5px; }
+        .task-list::-webkit-scrollbar-thumb {
+            background-color: #475569;
+            border-radius: 10px;
+        }
+
+        .task-item {
+            background: rgba(15, 23, 42, 0.65);
+            border: 1px solid #334155;
+            border-radius: 8px;
+            padding: 10px 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 10px;
+            transition: var(--transition);
+        }
+
+        .task-item:hover {
+            border-color: #60a5fa;
+            background: rgba(15, 23, 42, 0.85);
+        }
+
+        .task-item.completed {
+            opacity: 0.78;
+            border-left: 3.5px solid var(--success);
+        }
+
+        .task-item.completed .task-title-text {
+            text-decoration: line-through;
+            color: #94a3b8;
+        }
+
+        .task-item-left {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            flex: 1;
+            min-width: 0;
+        }
+
+        .status-toggle-btn {
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            border: 2px solid #60a5fa;
+            background: transparent;
+            color: transparent;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            margin-top: 2px;
+            flex-shrink: 0;
+            transition: var(--transition);
+        }
+
+        .task-item.completed .status-toggle-btn {
+            background: var(--success);
+            border-color: var(--success);
+            color: white;
+        }
+
+        .task-details { flex: 1; min-width: 0; }
+
+        .task-header-row {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            flex-wrap: wrap;
+            margin-bottom: 3px;
+        }
+
+        .task-title-text {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-light);
+            word-break: break-word;
+        }
+
+        .badge {
+            padding: 2px 7px;
+            border-radius: 14px;
+            font-size: 0.68rem;
+            font-weight: 600;
+        }
+
+        .badge-priority-Tinggi { background: rgba(239, 68, 68, 0.2); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.4); }
+        .badge-priority-Sedang { background: rgba(245, 158, 11, 0.2); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.4); }
+        .badge-priority-Rendah { background: rgba(59, 130, 246, 0.2); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.4); }
+
+        .badge-status-Selesai { background: rgba(16, 185, 129, 0.2); color: #34d399; }
+        .badge-status-Belum { background: rgba(148, 163, 184, 0.2); color: #cbd5e1; }
+
+        .task-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            font-size: 0.78rem;
+            color: #94a3b8;
+        }
+
+        .task-meta span {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .task-meta i { color: #60a5fa; }
+
+        .task-notes-text {
+            font-size: 0.78rem;
+            color: #cbd5e1;
+            background: rgba(30, 41, 59, 0.6);
+            padding: 5px 8px;
+            border-radius: 5px;
+            margin-top: 5px;
+            border-left: 2.5px solid #475569;
+            word-break: break-word;
+        }
+
+        .task-actions { display: flex; gap: 6px; flex-shrink: 0; }
+
+        .action-icon-btn {
+            min-width: 32px;
+            height: 32px;
+            padding: 0 8px;
+            border-radius: 6px;
+            border: 1px solid #334155;
+            background: rgba(30, 41, 59, 0.9);
+            color: #cbd5e1;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            transition: var(--transition);
+            font-size: 0.82rem;
+        }
+
+        .action-icon-btn .btn-label { display: none; font-size: 0.76rem; font-weight: 600; }
+
+        .action-icon-btn.edit-btn:hover {
+            background: rgba(37, 99, 235, 0.25);
+            border-color: #60a5fa;
+            color: #60a5fa;
+        }
+
+        .action-icon-btn.delete-btn:hover {
+            background: rgba(239, 68, 68, 0.25);
+            border-color: #f87171;
+            color: #f87171;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 26px 14px;
+            color: #94a3b8;
+            border: 1px dashed #334155;
+            border-radius: 8px;
+        }
+
+        .empty-state i {
+            font-size: 1.8rem;
+            color: #475569;
+            margin-bottom: 6px;
+        }
+
+        /* === Kontak Section === */
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            max-width: 1000px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .contact-info-card, .contact-wrapper {
+            background: var(--card-bg);
+            backdrop-filter: blur(8px);
+            padding: 35px;
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .info-item i { font-size: 1.3rem; color: #60a5fa; margin-top: 3px; }
+        .info-item h4 { color: var(--text-light); font-size: 1.05rem; margin-bottom: 3px; }
+        .info-item p, .info-item a { color: #cbd5e1; font-size: 0.95rem; text-decoration: none; }
+        .info-item a:hover { color: #60a5fa; }
+
+        .social-links { display: flex; gap: 12px; margin-top: 15px; }
+        .social-btn {
+            width: 40px;
+            height: 40px;
+            background: #334155;
+            color: var(--text-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        .social-btn:hover { background: var(--accent); transform: translateY(-3px); }
+
+        .form-group { margin-bottom: 16px; }
+        .form-group label { display: block; margin-bottom: 6px; color: var(--text-light); font-weight: 500; font-size: 0.95rem; }
+        .form-control {
+            width: 100%;
+            padding: 11px 13px;
+            background: rgba(15, 23, 42, 0.75);
+            border: 1px solid #475569;
+            color: white;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 0.95rem;
+            transition: 0.3s;
+        }
+        .form-control:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.3); }
+
+        /* === Buttons === */
+        .btn {
+            padding: 10px 18px;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.92rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            transition: transform 0.2s, box-shadow 0.2s, background-color 0.2s;
+            white-space: nowrap;
+        }
+        .btn-primary { background-color: var(--accent); color: var(--text-light); box-shadow: 0 4px 10px rgba(37, 99, 235, 0.35); }
+        .btn-primary:hover { background-color: var(--accent-hover); box-shadow: 0 6px 15px rgba(37, 99, 235, 0.55); }
+        .btn-secondary { background-color: #334155; color: var(--text-light); }
+        .btn-secondary:hover { background-color: #475569; }
+        .btn-danger { background-color: var(--danger); color: white; }
+        .btn-danger:hover { background-color: #dc2626; }
+        .btn-warning { background-color: var(--warning); color: #0f172a; padding: 6px 12px; font-size: 0.8rem; }
+        .btn-warning:hover { background-color: #d97706; }
+        .btn-outline { background-color: transparent; color: #60a5fa; border: 2px solid var(--accent); padding: 9px 18px; }
+        .btn-outline:hover { background-color: var(--accent); color: white; }
+
+        /* === Modal (Pop-up) === */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(5px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-overlay.active { opacity: 1; pointer-events: auto; }
+        .modal-content {
+            background: #1e293b;
+            border: 1px solid #334155;
+            color: white;
+            padding: 35px;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 420px;
+            transform: scale(0.85);
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+        .modal-overlay.active .modal-content { transform: scale(1); }
+
+        .close-modal {
+            position: absolute;
+            top: 15px; right: 20px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #94a3b8;
+            transition: color 0.2s;
+        }
+        .close-modal:hover { color: white; }
+
+        .modal-info .modal-content { text-align: center; padding: 40px 30px; }
+        .modal-info i { font-size: 3.8rem; margin-bottom: 16px; animation: bounceIn 0.5s; }
+        .icon-success { color: #10b981; } 
+        .icon-logout { color: #3b82f6; } 
+        .icon-warning { color: #f59e0b; }
+
+        .confirm-actions {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin-top: 24px;
+            flex-wrap: wrap;
+        }
+
+        @keyframes bounceIn {
+            0% { transform: scale(0); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+
+        footer { text-align: center; padding: 25px; background: #090d16; color: #94a3b8; position: relative; z-index: 10; }
+
+        /* === Responsif untuk Tablet & HP === */
+        @media (max-width: 960px) {
+            #tugas { min-height: auto; padding: 90px 5% 48px; }
+            .task-main-grid { grid-template-columns: 1fr; }
+            .task-toolbar { grid-template-columns: 1fr 1fr; }
+            .search-box { grid-column: 1 / -1; }
+            .task-list { max-height: none; overflow-y: visible; }
+        }
+
+        @media (max-width: 768px) {
+            nav { padding: 0.75rem 4%; }
+            .logo { font-size: 1.2rem; gap: 7px; }
+            .nav-right { gap: 8px; }
+            #btnLogin { padding: 7px 12px; font-size: 0.85rem; }
+            .mobile-menu-btn { display: inline-flex; }
+
+            .nav-center {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: #1e293b;
+                border-top: 1px solid #334155;
+                box-shadow: 0 10px 20px rgba(0,0,0,0.6);
+                display: none;
+                z-index: 999;
+            }
+
+            .nav-center.active {
+                display: block;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                align-items: stretch;
+                padding: 14px 5%;
+                gap: 6px;
+            }
+
+            .nav-links li { width: 100%; }
+            .nav-links li a { width: 100%; padding: 11px 12px; border-radius: 6px; }
+
+            section { padding: 90px 4% 60px; min-height: auto; }
+            #beranda { min-height: 85vh; }
+            .hero-title { font-size: 2rem; }
+            .hero-subtitle { font-size: 1rem; }
+            .hero-actions { flex-direction: column; width: 100%; }
+            .hero-actions .btn { width: 100%; justify-content: center; }
+
+            .scroll-card { min-width: 78vw; max-width: 85vw; padding: 26px 20px; }
+            .contact-container { grid-template-columns: 1fr; gap: 20px; }
+            .contact-info-card, .contact-wrapper { padding: 22px 18px; }
+
+            .auth-notice-banner { flex-direction: column; align-items: stretch; }
+            #btnBannerLogin { width: 100%; justify-content: center; padding: 8px 12px; }
+
+            .task-stats { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+            .stat-card { padding: 8px 10px; }
+            .stat-info h4 { font-size: 0.7rem; }
+            .stat-info .stat-number { font-size: 1.15rem; }
+            .stat-icon { width: 26px; height: 26px; font-size: 0.8rem; }
+
+            .task-toolbar { grid-template-columns: 1fr; }
+            .task-item { flex-direction: column; gap: 10px; }
+            .task-actions {
+                width: 100%;
+                justify-content: flex-end;
+                border-top: 1px solid rgba(51, 65, 85, 0.7);
+                padding-top: 8px;
+            }
+            .action-icon-btn {
+                padding: 6px 12px;
+                height: 34px;
+            }
+            .action-icon-btn .btn-label { display: inline; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigasi -->
+    <nav id="navbar">
+        <div class="logo">
+            <i class="fas fa-laptop-code"></i> Informatika
+        </div>
+        
+        <div class="nav-center" id="navCenter">
+            <ul class="nav-links">
+                <li><a href="#beranda" class="nav-item active"><i class="fas fa-home"></i> Beranda</a></li>
+                <li><a href="#profil" class="nav-item"><i class="fas fa-building"></i> Profil</a></li>
+                <li><a href="#akademik" class="nav-item"><i class="fas fa-book-open"></i> Akademik</a></li>
+                <li><a href="#tugas" class="nav-item"><i class="fas fa-tasks"></i> Tugas Kuliah</a></li>
+                <li><a href="#dosen" class="nav-item"><i class="fas fa-users"></i> Dosen</a></li>
+                <li><a href="#kontak" class="nav-item"><i class="fas fa-envelope"></i> Kontak</a></li>
+            </ul>
+        </div>
+        
+        <div class="nav-right">
+            <button id="btnLogin" class="btn btn-outline js-btn">
+                <i class="fas fa-sign-in-alt"></i> Login
+            </button>
+            
+            <div class="user-menu-container" id="userContainer">
+                <div id="userProfile" class="user-avatar" title="Klik untuk menu">A</div>
+                <div class="dropdown-menu" id="dropdownMenu">
+                    <button class="dropdown-item" id="btnLogout">
+                        <i class="fas fa-sign-out-alt"></i> Keluar
+                    </button>
+                </div>
+            </div>
+
+            <button class="mobile-menu-btn js-btn" id="mobileMenuBtn" aria-label="Buka Menu">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- 1. Beranda -->
+    <section id="beranda">
+        <canvas class="section-canvas"></canvas>
+        <div class="hero-content">
+            <h1 class="hero-title">Program Studi Informatika</h1>
+            <p class="hero-subtitle">Membangun masa depan digital melalui rekayasa perangkat lunak, pemrograman sistem, dan portal produktivitas tugas mahasiswa.</p>
+            <div class="hero-actions">
+                <a href="#profil" class="btn btn-primary js-btn">
+                    <i class="fas fa-arrow-down"></i> Mulai Jelajahi
+                </a>
+                <a href="#tugas" class="btn btn-outline js-btn">
+                    <i class="fas fa-clipboard-check"></i> Kelola Tugas Kuliah
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. Profil Program Studi -->
+    <section id="profil">
+        <canvas class="section-canvas"></canvas>
+        <h2 class="section-title">Profil Program Studi</h2>
+        <p class="section-subtitle">Mengenal visi, misi, peluang karir, dan fasilitas pendukung pembelajaran di Program Studi Informatika.</p>
+        <div class="horizontal-scroll">
+            <div class="scroll-card">
+                <i class="fas fa-bullseye"></i>
+                <h3>Visi Kami</h3>
+                <p>Menjadi pusat pendidikan informatika dan ilmu komputer terkemuka yang menghasilkan lulusan adaptif terhadap teknologi global pada tahun 2030, serta mampu bersaing di kancah nasional maupun internasional.</p>
+            </div>
+            <div class="scroll-card">
+                <i class="fas fa-tasks"></i>
+                <h3>Misi & Tujuan</h3>
+                <p>Menciptakan ekosistem belajar yang berpusat pada mahasiswa, mendorong riset, inovasi UI/UX, rekayasa perangkat lunak, dan membangun etika digital masyarakat di era siber.</p>
+            </div>
+            <div class="scroll-card">
+                <i class="fas fa-briefcase"></i>
+                <h3>Prospek Karir</h3>
+                <p>Lulusan kami dipersiapkan secara matang untuk menjadi Software Engineer, Data Analyst, UI/UX Designer, IT Consultant, hingga Network Administrator profesional.</p>
+            </div>
+            <div class="scroll-card">
+                <i class="fas fa-microchip"></i>
+                <h3>Fasilitas Modern</h3>
+                <p>Akses ke laboratorium komputasi spesifikasi tinggi, server lokal berbasis Linux, serta kolaborasi digital dengan platform industri terkemuka.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. Informasi Akademik -->
+    <section id="akademik">
+        <canvas class="section-canvas"></canvas>
+        <h2 class="section-title">Informasi Akademik</h2>
+        <p class="section-subtitle">Kurikulum inti berbasis praktik industri dan kalender akademik perkuliahan aktif.</p>
+        <div class="horizontal-scroll">
+            <div class="scroll-card">
+                <i class="fas fa-code"></i>
+                <h3>Pemrograman C# & C++</h3>
+                <p>Kurikulum mendalam pada dasar algoritma, manipulasi struktur data, hingga pengembangan aplikasi desktop berorientasi objek tingkat lanjut untuk solusi dunia nyata.</p>
+            </div>
+            <div class="scroll-card">
+                <i class="fas fa-database"></i>
+                <h3>Basis Data MySQL</h3>
+                <p>Mempelajari perancangan arsitektur database, relasional data, query optimasi, dan integrasi sistem backend untuk mengelola sistem informasi skala enterprise.</p>
+            </div>
+            <div class="scroll-card">
+                <i class="fas fa-paint-brush"></i>
+                <h3>Desain Antarmuka (UI/UX)</h3>
+                <p>Merancang antarmuka aplikasi interaktif dengan wireframe modern, menganalisis alur pengguna (User Flow), dan menciptakan prototipe digital yang fungsional.</p>
+            </div>
+            <div class="scroll-card">
+                <i class="fas fa-network-wired"></i>
+                <h3>Jaringan Komputer</h3>
+                <p>Mendalami topologi jaringan, manajemen infrastruktur server lokal, dan implementasi keamanan data digital dari berbagai ancaman serangan siber.</p>
+            </div>
+            <div class="scroll-card">
+                <i class="fas fa-calendar-alt"></i>
+                <h3>Kalender Kuliah</h3>
+                <p>Akses terpusat untuk informasi pengisian KRS, batas akhir tugas proyek, minggu UTS/UAS, jadwal sidang skripsi, hingga kegiatan himpunan mahasiswa.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. Student Task Manager -->
+    <section id="tugas">
+        <canvas class="section-canvas"></canvas>
+        <h2 class="section-title">Student Task Manager</h2>
+        <p class="section-subtitle">Kelola tenggat waktu dan progres tugas mata kuliah secara ringkas.</p>
+
+        <div class="task-manager-wrapper">
+            <div class="auth-notice-banner" id="authNoticeBanner">
+                <div class="auth-notice-text">
+                    <i class="fas fa-lock"></i>
+                    <span><strong>Mode Lihat Saja:</strong> Silakan <strong>Login</strong> untuk menambah, mengubah, atau menghapus tugas.</span>
+                </div>
+                <button type="button" id="btnBannerLogin" class="btn btn-warning js-btn">
+                    <i class="fas fa-sign-in-alt"></i> Login
+                </button>
+            </div>
+
+            <div class="task-stats">
+                <div class="stat-card stat-total">
+                    <div class="stat-info">
+                        <h4>Total Tugas</h4>
+                        <div class="stat-number" id="statTotal">0</div>
+                    </div>
+                    <div class="stat-icon">
+                        <i class="fas fa-layer-group"></i>
+                    </div>
+                </div>
+                <div class="stat-card stat-pending">
+                    <div class="stat-info">
+                        <h4>Belum Selesai</h4>
+                        <div class="stat-number" id="statPending">0</div>
+                    </div>
+                    <div class="stat-icon">
+                        <i class="fas fa-hourglass-half"></i>
+                    </div>
+                </div>
+                <div class="stat-card stat-done">
+                    <div class="stat-info">
+                        <h4>Selesai</h4>
+                        <div class="stat-number" id="statCompleted">0</div>
+                    </div>
+                    <div class="stat-icon">
+                        <i class="fas fa-check-double"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="task-main-grid">
+                <div class="task-form-card" id="taskFormCard">
+                    <h3>
+                        <span id="formModeTitle"><i class="fas fa-plus-circle" style="color: #60a5fa;"></i> Tambah Tugas</span>
+                        <span class="lock-pill" id="formLockBadge"><i class="fas fa-lock"></i> Perlu Login</span>
+                    </h3>
+                    <form id="taskForm" novalidate>
+                        <input type="hidden" id="taskId">
+                        
+                        <div class="form-group">
+                            <label for="taskTitle">Judul Tugas <span style="color:#f87171;">*</span></label>
+                            <input type="text" id="taskTitle" class="form-control" placeholder="Contoh: Laporan Data Mining">
+                            <div class="form-error" id="errTaskTitle">Judul tugas wajib diisi.</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="taskCourse">Mata Kuliah <span style="color:#f87171;">*</span></label>
+                            <input type="text" id="taskCourse" class="form-control" placeholder="Contoh: Artificial Intelligence" list="courseSuggestions">
+                            <datalist id="courseSuggestions">
+                                <option value="Artificial Intelligence">
+                                <option value="Basis Data">
+                                <option value="Pemrograman Web">
+                                <option value="Data Mining">
+                                <option value="Rekayasa Perangkat Lunak">
+                                <option value="Jaringan Komputer">
+                            </datalist>
+                            <div class="form-error" id="errTaskCourse">Nama mata kuliah wajib diisi.</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="taskDueDate">Tenggat Waktu <span style="color:#f87171;">*</span></label>
+                            <input type="date" id="taskDueDate" class="form-control">
+                            <div class="form-error" id="errTaskDueDate">Tenggat waktu wajib diisi dengan tanggal yang valid.</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="taskPriority">Prioritas</label>
+                            <select id="taskPriority" class="form-control">
+                                <option value="Tinggi">Tinggi</option>
+                                <option value="Sedang" selected>Sedang</option>
+                                <option value="Rendah">Rendah</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="taskStatus">Status</label>
+                            <select id="taskStatus" class="form-control">
+                                <option value="Belum Selesai" selected>Belum Selesai</option>
+                                <option value="Selesai">Selesai</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="taskNotes">Catatan</label>
+                            <input type="text" id="taskNotes" class="form-control" placeholder="Catatan singkat...">
+                        </div>
+
+                        <div class="form-btn-group">
+                            <button type="submit" id="btnSaveTask" class="btn btn-primary js-btn" style="flex: 1; justify-content: center;">
+                                <i class="fas fa-save"></i> Simpan
+                            </button>
+                            <button type="button" id="btnCancelEdit" class="btn btn-secondary js-btn" style="display: none;">
+                                <i class="fas fa-times"></i> Batal
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="task-list-card">
+                    <div class="task-toolbar">
+                        <div class="search-box">
+                            <i class="fas fa-search"></i>
+                            <input type="text" id="searchTask" class="form-control" placeholder="Cari judul atau mata kuliah...">
+                        </div>
+                        <select id="filterStatus" class="form-control" aria-label="Filter Status">
+                            <option value="Semua">Semua Status</option>
+                            <option value="Belum Selesai">Belum Selesai</option>
+                            <option value="Selesai">Selesai</option>
+                        </select>
+                        <select id="filterPriority" class="form-control" aria-label="Filter Prioritas">
+                            <option value="Semua">Semua Prioritas</option>
+                            <option value="Tinggi">Prioritas Tinggi</option>
+                            <option value="Sedang">Prioritas Sedang</option>
+                            <option value="Rendah">Prioritas Rendah</option>
+                        </select>
+                    </div>
+
+                    <div id="taskListContainer" class="task-list"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. Daftar Dosen -->
+    <section id="dosen">
+        <canvas class="section-canvas"></canvas>
+        <h2 class="section-title">Daftar Dosen Pengajar</h2>
+        <p class="section-subtitle">Tenaga pendidik profesional dan peneliti aktif di bidang teknologi informasi.</p>
+        <div class="horizontal-scroll">
+            <div class="scroll-card card-center">
+                <i class="fas fa-user-tie"></i>
+                <h3>Dr. Budi Santoso, M.Kom.</h3>
+                <p>Spesialisasi: Algoritma Pemrograman & C++</p>
+            </div>
+            <div class="scroll-card card-center">
+                <i class="fas fa-user-graduate"></i>
+                <h3>Siti Aminah, M.T.</h3>
+                <p>Spesialisasi: Rekayasa Perangkat Lunak & Desain UI/UX</p>
+            </div>
+            <div class="scroll-card card-center">
+                <i class="fas fa-chalkboard-teacher"></i>
+                <h3>Hadi Wijaya, M.Cs.</h3>
+                <p>Spesialisasi: Keamanan Siber & Jaringan Komputer</p>
+            </div>
+            <div class="scroll-card card-center">
+                <i class="fas fa-user-ninja"></i>
+                <h3>Dr. Rina Puspita, S.Kom.</h3>
+                <p>Spesialisasi: Kecerdasan Buatan (AI) & Machine Learning</p>
+            </div>
+            <div class="scroll-card card-center">
+                <i class="fas fa-user-cog"></i>
+                <h3>Bramantyo, M.Eng.</h3>
+                <p>Spesialisasi: Basis Data (MySQL) & Arsitektur Sistem</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. Kontak -->
+    <section id="kontak">
+        <canvas class="section-canvas"></canvas>
+        <h2 class="section-title">Hubungi Kami</h2>
+        <p class="section-subtitle">Layanan informasi akademik dan komunikasi langsung dengan sekretariat program studi.</p>
+        <div class="contact-container">
+            <div class="contact-info-card">
+                <div>
+                    <h3 style="color: var(--text-light); margin-bottom: 20px;"><i class="fas fa-map-marker-alt"></i> Sekretariat Prodi</h3>
+                    
+                    <div class="info-item">
+                        <i class="fas fa-building"></i>
+                        <div>
+                            <h4>Alamat</h4>
+                            <p>Gedung Fakultas Teknologi Informasi Lt. 3, Jl. Sawo Manila No. 61, Pasar Minggu, Jakarta Selatan</p>
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <i class="fas fa-phone-alt"></i>
+                        <div>
+                            <h4>Telepon / WhatsApp</h4>
+                            <p>+62 821-4567-8910</p>
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h4>Email Resmi</h4>
+                            <p>informatika@unas.ac.id</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 style="color: var(--text-light); margin-bottom: 10px;">Media Sosial Resmi</h4>
+                    <div class="social-links">
+                        <a href="#" class="social-btn" title="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-btn" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-btn" title="GitHub"><i class="fab fa-github"></i></a>
+                        <a href="#" class="social-btn" title="YouTube"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contact-wrapper">
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label>Nama Lengkap</label>
+                        <input type="text" id="contactName" class="form-control" placeholder="Masukkan nama Anda" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Email Pengirim</label>
+                        <input type="email" id="contactEmail" class="form-control" placeholder="contoh@email.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Pesan atau Pertanyaan</label>
+                        <textarea id="contactMessage" class="form-control" rows="4" placeholder="Tuliskan pesan Anda..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary js-btn" style="width: 100%; justify-content: center;">
+                        <i class="fas fa-paper-plane"></i> Kirim Pesan
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Program Studi Informatika - Universitas Nasional. All rights reserved.</p>
+    </footer>
+
+    <!-- === MODAL LOGIN === -->
+    <div class="modal-overlay" id="loginModal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeLogin">&times;</span>
+            <h2 style="margin-bottom: 20px; color: var(--text-light); text-align: center;">
+                <i class="fas fa-user-circle"></i> Login Portal
+            </h2>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label>Nama Panggilan</label>
+                    <input type="text" id="loginName" class="form-control" placeholder="Masukkan nama Anda" required>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="loginPass" class="form-control" placeholder="Masukkan password" required>
+                </div>
+                <button type="submit" class="btn btn-primary js-btn" style="width: 100%; justify-content: center;">
+                    <i class="fas fa-sign-in-alt"></i> Masuk
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- === MODAL KONFIRMASI HAPUS TUGAS === -->
+    <div class="modal-overlay modal-info" id="deleteConfirmModal">
+        <div class="modal-content">
+            <i class="fas fa-exclamation-triangle icon-warning"></i>
+            <h2 style="color: var(--text-light);">Hapus Tugas?</h2>
+            <p style="color: #cbd5e1; margin-top: 10px;" id="deleteConfirmDesc">Apakah Anda yakin ingin menghapus tugas ini? Data yang dihapus tidak dapat dikembalikan.</p>
+            <div class="confirm-actions">
+                <button type="button" id="btnCancelDelete" class="btn btn-secondary js-btn">Batal</button>
+                <button type="button" id="btnConfirmDelete" class="btn btn-danger js-btn"><i class="fas fa-trash-alt"></i> Hapus</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- === MODAL INFO === -->
+    <div class="modal-overlay modal-info" id="infoModal">
+        <div class="modal-content">
+            <i class="fas fa-check-circle icon-success" id="infoIcon"></i>
+            <h2 style="color: var(--text-light);" id="infoTitle">Berhasil!</h2>
+            <p style="color: #94a3b8; margin-top: 10px;" id="infoDesc">Teks deskripsi.</p>
+        </div>
+    </div>
+
+    <!-- === JAVASCRIPT === -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // 1. ANIMASI PARTIKEL DI SETIAP SECTION
+            const canvases = document.querySelectorAll('.section-canvas');
+            
+            canvases.forEach(canvas => {
+                const ctx = canvas.getContext('2d');
+                
+                function resize() {
+                    canvas.width = canvas.parentElement.offsetWidth;
+                    canvas.height = canvas.parentElement.offsetHeight;
+                }
+                resize();
+                window.addEventListener('resize', resize);
+
+                let particles = [];
+                const count = 28;
+
+                class Dot {
+                    constructor() {
+                        this.x = Math.random() * canvas.width;
+                        this.y = Math.random() * canvas.height;
+                        this.size = Math.random() * 2 + 1;
+                        this.speedX = (Math.random() - 0.5) * 0.7;
+                        this.speedY = (Math.random() - 0.5) * 0.7;
+                    }
+                    update() {
+                        this.x += this.speedX;
+                        this.y += this.speedY;
+                        if (this.x > canvas.width) this.x = 0;
+                        else if (this.x < 0) this.x = canvas.width;
+                        if (this.y > canvas.height) this.y = 0;
+                        else if (this.y < 0) this.y = canvas.height;
+                    }
+                    draw() {
+                        ctx.fillStyle = 'rgba(96, 165, 250, 0.3)';
+                        ctx.beginPath();
+                        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                        ctx.fill();
+                    }
+                }
+
+                for (let i = 0; i < count; i++) {
+                    particles.push(new Dot());
+                }
+
+                function render() {
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    particles.forEach(p => {
+                        p.update();
+                        p.draw();
+                    });
+                    requestAnimationFrame(render);
+                }
+                render();
+            });
+
+            // 2. ANIMASI TOMBOL & NAVIGASI
+            document.querySelectorAll('.js-btn').forEach(btn => {
+                btn.addEventListener('mousedown', function() { this.style.transform = 'scale(0.95)'; });
+                btn.addEventListener('mouseup', function() { this.style.transform = 'scale(1)'; });
+                btn.addEventListener('mouseleave', function() { this.style.transform = 'scale(1)'; });
+            });
+
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const navCenter = document.getElementById('navCenter');
+            const iconHamburger = mobileMenuBtn.querySelector('i');
+            
+            mobileMenuBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                navCenter.classList.toggle('active');
+                if (navCenter.classList.contains('active')) {
+                    iconHamburger.classList.remove('fa-bars');
+                    iconHamburger.classList.add('fa-times'); 
+                } else {
+                    iconHamburger.classList.remove('fa-times');
+                    iconHamburger.classList.add('fa-bars');
+                }
+            });
+
+            const navLinksAll = document.querySelectorAll('.nav-item');
+            navLinksAll.forEach(link => {
+                link.addEventListener('click', () => {
+                    navCenter.classList.remove('active');
+                    iconHamburger.classList.remove('fa-times');
+                    iconHamburger.classList.add('fa-bars');
+                });
+            });
+
+            window.addEventListener('click', (e) => {
+                if (!navCenter.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
+                    navCenter.classList.remove('active');
+                    iconHamburger.classList.remove('fa-times');
+                    iconHamburger.classList.add('fa-bars');
+                }
+            });
+
+            const sections = document.querySelectorAll('section');
+            const navbar = document.getElementById('navbar');
+
+            window.addEventListener('scroll', () => {
+                let current = '';
+                if (window.scrollY > 50) {
+                    navbar.style.boxShadow = '0 4px 15px rgba(0,0,0,0.5)';
+                } else {
+                    navbar.style.boxShadow = '0 2px 10px rgba(0,0,0,0.3)';
+                }
+
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    if (window.pageYOffset >= (sectionTop - 160)) {
+                        current = section.getAttribute('id');
+                    }
+                });
+
+                navLinksAll.forEach(item => {
+                    item.classList.remove('active');
+                    const icon = item.querySelector('i');
+                    icon.style.transform = 'scale(1)';
+                    if (current && item.getAttribute('href').includes(current)) {
+                        item.classList.add('active');
+                        icon.style.transform = 'scale(1.15)';
+                    }
+                });
+            });
+
+            // 3. POPUP NOTIFIKASI
+            const infoModal = document.getElementById('infoModal');
+            const infoIcon = document.getElementById('infoIcon');
+            const infoTitle = document.getElementById('infoTitle');
+            const infoDesc = document.getElementById('infoDesc');
+            let popupTimeout;
+
+            function showPopup(iconClass, title, desc, iconColorClass = 'icon-success') {
+                clearTimeout(popupTimeout);
+                infoIcon.className = `fas ${iconClass} ${iconColorClass}`;
+                infoTitle.textContent = title;
+                infoDesc.textContent = desc;
+                infoModal.classList.add('active');
+                popupTimeout = setTimeout(() => {
+                    infoModal.classList.remove('active');
+                }, 1800);
+            }
+
+            // 4. LOGIN, LOGOUT & PEMBATASAN AKSES TASK MANAGER
+            const AUTH_KEY = 'unas_student_user_v1';
+            let currentUser = null;
+
+            const btnLogin = document.getElementById('btnLogin');
+            const btnBannerLogin = document.getElementById('btnBannerLogin');
+            const loginModal = document.getElementById('loginModal');
+            const closeLogin = document.getElementById('closeLogin');
+            const loginForm = document.getElementById('loginForm');
+            
+            const userContainer = document.getElementById('userContainer');
+            const userProfile = document.getElementById('userProfile');
+            const dropdownMenu = document.getElementById('dropdownMenu');
+            const btnLogout = document.getElementById('btnLogout');
+
+            const authNoticeBanner = document.getElementById('authNoticeBanner');
+            const taskFormCard = document.getElementById('taskFormCard');
+            const formLockBadge = document.getElementById('formLockBadge');
+
+            function updateAuthUI() {
+                const isLoggedIn = Boolean(currentUser);
+                const formInputs = document.querySelectorAll('#taskForm input, #taskForm select, #taskForm textarea');
+
+                if (isLoggedIn) {
+                    btnLogin.style.display = 'none';
+                    userContainer.style.display = 'flex';
+                    userProfile.textContent = currentUser.charAt(0).toUpperCase();
+                    userProfile.title = `Login sebagai ${currentUser}`;
+
+                    authNoticeBanner.style.display = 'none';
+                    taskFormCard.classList.remove('locked');
+                    formLockBadge.style.display = 'none';
+                    formInputs.forEach(el => { el.disabled = false; });
+                } else {
+                    userContainer.style.display = 'none';
+                    btnLogin.style.display = 'inline-flex';
+
+                    authNoticeBanner.style.display = 'flex';
+                    taskFormCard.classList.add('locked');
+                    formLockBadge.style.display = 'inline-block';
+                    formInputs.forEach(el => { el.disabled = true; });
+                }
+            }
+
+            function requireLogin(actionLabel = 'mengelola tugas') {
+                if (currentUser) return true;
+                showPopup('fa-lock', 'Login Diperlukan', `Silakan login terlebih dahulu untuk ${actionLabel}.`, 'icon-warning');
+                setTimeout(() => {
+                    loginModal.classList.add('active');
+                    document.getElementById('loginName').focus();
+                }, 400);
+                return false;
+            }
+
+            try {
+                const savedUser = localStorage.getItem(AUTH_KEY);
+                if (savedUser && savedUser.trim() !== '') {
+                    currentUser = savedUser.trim();
+                }
+            } catch (err) {
+                console.error('Gagal memuat sesi login:', err);
+            }
+
+            btnLogin.addEventListener('click', () => loginModal.classList.add('active'));
+            btnBannerLogin.addEventListener('click', () => loginModal.classList.add('active'));
+            closeLogin.addEventListener('click', () => loginModal.classList.remove('active'));
+            window.addEventListener('click', (e) => {
+                if (e.target === loginModal) loginModal.classList.remove('active');
+            });
+
+            loginForm.addEventListener('submit', (e) => {
+                e.preventDefault(); 
+                const nameInput = document.getElementById('loginName').value.trim();
+                if (!nameInput) return;
+
+                currentUser = nameInput;
+                try {
+                    localStorage.setItem(AUTH_KEY, currentUser);
+                } catch (err) {
+                    console.error('Gagal menyimpan sesi login:', err);
+                }
+
+                loginModal.classList.remove('active');
+                updateAuthUI();
+                loginForm.reset();
+                showPopup('fa-check-circle', 'Berhasil Login!', `Selamat datang, ${currentUser}. Anda dapat menambah dan mengedit tugas.`, 'icon-success');
+            });
+
+            userProfile.addEventListener('click', (e) => {
+                e.stopPropagation(); 
+                dropdownMenu.classList.toggle('active');
+            });
+
+            window.addEventListener('click', (e) => {
+                if (!userContainer.contains(e.target)) {
+                    dropdownMenu.classList.remove('active');
+                }
+            });
+
+            btnLogout.addEventListener('click', () => {
+                dropdownMenu.classList.remove('active'); 
+                currentUser = null;
+                try {
+                    localStorage.removeItem(AUTH_KEY);
+                } catch (err) {
+                    console.error('Gagal menghapus sesi login:', err);
+                }
+                resetTaskForm();
+                updateAuthUI();
+                showPopup('fa-sign-out-alt', 'Berhasil Keluar', 'Anda telah keluar dari sistem.', 'icon-logout');
+            });
+
+            // 5. KONTAK
+            const contactForm = document.getElementById('contactForm');
+            contactForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const senderName = document.getElementById('contactName').value.trim();
+                showPopup('fa-paper-plane', 'Pesan Terkirim!', `Terima kasih ${senderName}, pesan Anda berhasil dikirim ke pengelola prodi.`, 'icon-success');
+                contactForm.reset();
+            });
+
+            // 6. STUDENT TASK MANAGER
+            const STORAGE_KEY = 'unas_student_tasks_v1';
+            let tasks = [];
+            let taskToDeleteId = null;
+
+            const taskForm = document.getElementById('taskForm');
+            const formModeTitle = document.getElementById('formModeTitle');
+            const taskIdInput = document.getElementById('taskId');
+            const taskTitleInput = document.getElementById('taskTitle');
+            const taskCourseInput = document.getElementById('taskCourse');
+            const taskDueDateInput = document.getElementById('taskDueDate');
+            const taskPriorityInput = document.getElementById('taskPriority');
+            const taskStatusInput = document.getElementById('taskStatus');
+            const taskNotesInput = document.getElementById('taskNotes');
+            const btnSaveTask = document.getElementById('btnSaveTask');
+            const btnCancelEdit = document.getElementById('btnCancelEdit');
+
+            const errTaskTitle = document.getElementById('errTaskTitle');
+            const errTaskCourse = document.getElementById('errTaskCourse');
+            const errTaskDueDate = document.getElementById('errTaskDueDate');
+
+            const searchTaskInput = document.getElementById('searchTask');
+            const filterStatusSelect = document.getElementById('filterStatus');
+            const filterPrioritySelect = document.getElementById('filterPriority');
+            const taskListContainer = document.getElementById('taskListContainer');
+
+            const statTotal = document.getElementById('statTotal');
+            const statPending = document.getElementById('statPending');
+            const statCompleted = document.getElementById('statCompleted');
+
+            const deleteConfirmModal = document.getElementById('deleteConfirmModal');
+            const deleteConfirmDesc = document.getElementById('deleteConfirmDesc');
+            const btnCancelDelete = document.getElementById('btnCancelDelete');
+            const btnConfirmDelete = document.getElementById('btnConfirmDelete');
+
+            const defaultSampleTasks = [
+                {
+                    id: 'task-sample-1',
+                    title: 'Laporan Praktikum AI - Student Task Manager',
+                    course: 'Artificial Intelligence',
+                    dueDate: '2026-11-28',
+                    priority: 'Tinggi',
+                    status: 'Belum Selesai',
+                    notes: 'Kumpulkan file index.html beserta laporan pengujian CRUD.'
+                },
+                {
+                    id: 'task-sample-2',
+                    title: 'Perancangan ERD & Normalisasi Tabel',
+                    course: 'Basis Data',
+                    dueDate: '2026-11-25',
+                    priority: 'Sedang',
+                    status: 'Selesai',
+                    notes: 'Ekspor skema SQL dari MySQL Workbench.'
+                }
+            ];
+
+            function loadTasks() {
+                try {
+                    const rawData = localStorage.getItem(STORAGE_KEY);
+                    if (rawData === null) {
+                        tasks = [...defaultSampleTasks];
+                        saveTasks();
+                    } else {
+                        const parsed = JSON.parse(rawData);
+                        if (Array.isArray(parsed)) {
+                            tasks = parsed;
+                        } else {
+                            throw new Error('Format data tidak valid');
+                        }
+                    }
+                } catch (error) {
+                    console.error('Gagal membaca data tugas dari localStorage:', error);
+                    tasks = [...defaultSampleTasks];
+                }
+            }
+
+            function saveTasks() {
+                try {
+                    localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks));
+                } catch (error) {
+                    console.error('Gagal menyimpan ke localStorage:', error);
+                }
+            }
+
+            function isValidDateString(dateStr) {
+                if (!/^\d{4}-\d{2}-\d{2}$/.test(dateStr)) return false;
+                const dateObj = new Date(dateStr + 'T00:00:00');
+                return !isNaN(dateObj.getTime());
+            }
+
+            function formatTanggalIndo(dateStr) {
+                if (!isValidDateString(dateStr)) return dateStr;
+                const bulan = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'];
+                const [year, month, day] = dateStr.split('-');
+                return `${parseInt(day, 10)} ${bulan[parseInt(month, 10) - 1]} ${year}`;
+            }
+
+            function clearValidationErrors() {
+                [taskTitleInput, taskCourseInput, taskDueDateInput].forEach(el => el.classList.remove('invalid'));
+                [errTaskTitle, errTaskCourse, errTaskDueDate].forEach(el => el.style.display = 'none');
+            }
+
+            function validateTaskForm() {
+                clearValidationErrors();
+                let isValid = true;
+
+                if (taskTitleInput.value.trim() === '') {
+                    taskTitleInput.classList.add('invalid');
+                    errTaskTitle.style.display = 'block';
+                    isValid = false;
+                }
+
+                if (taskCourseInput.value.trim() === '') {
+                    taskCourseInput.classList.add('invalid');
+                    errTaskCourse.style.display = 'block';
+                    isValid = false;
+                }
+
+                if (!isValidDateString(taskDueDateInput.value)) {
+                    taskDueDateInput.classList.add('invalid');
+                    errTaskDueDate.style.display = 'block';
+                    isValid = false;
+                }
+
+                return isValid;
+            }
+
+            function resetTaskForm() {
+                taskForm.reset();
+                taskIdInput.value = '';
+                taskPriorityInput.value = 'Sedang';
+                taskStatusInput.value = 'Belum Selesai';
+                clearValidationErrors();
+                formModeTitle.innerHTML = '<i class="fas fa-plus-circle" style="color: #60a5fa;"></i> Tambah Tugas';
+                btnSaveTask.innerHTML = '<i class="fas fa-save"></i> Simpan';
+                btnCancelEdit.style.display = 'none';
+            }
+
+            function updateSummaryStats() {
+                const total = tasks.length;
+                const completed = tasks.filter(t => t.status === 'Selesai').length;
+                const pending = total - completed;
+
+                statTotal.textContent = total;
+                statPending.textContent = pending;
+                statCompleted.textContent = completed;
+            }
+
+            function renderTasks() {
+                updateSummaryStats();
+
+                const keyword = searchTaskInput.value.trim().toLowerCase();
+                const statusFilter = filterStatusSelect.value;
+                const priorityFilter = filterPrioritySelect.value;
+
+                const filteredTasks = tasks.filter(task => {
+                    const matchKeyword = task.title.toLowerCase().includes(keyword) || 
+                                         task.course.toLowerCase().includes(keyword);
+                    const matchStatus = (statusFilter === 'Semua') || (task.status === statusFilter);
+                    const matchPriority = (priorityFilter === 'Semua') || (task.priority === priorityFilter);
+                    return matchKeyword && matchStatus && matchPriority;
+                });
+
+                taskListContainer.innerHTML = '';
+
+                if (filteredTasks.length === 0) {
+                    const emptyDiv = document.createElement('div');
+                    emptyDiv.className = 'empty-state';
+                    emptyDiv.innerHTML = `
+                        <i class="fas fa-folder-open"></i>
+                        <h4 style="color: var(--text-light); margin-bottom: 3px; font-size: 0.9rem;">Tidak ada tugas ditemukan</h4>
+                        <p style="font-size: 0.78rem;">${tasks.length === 0 ? 'Silakan login dan tambahkan tugas kuliah baru.' : 'Coba ubah kata kunci pencarian atau filter status/prioritas.'}</p>
+                    `;
+                    taskListContainer.appendChild(emptyDiv);
+                    return;
+                }
+
+                filteredTasks.forEach(task => {
+                    const itemDiv = document.createElement('div');
+                    itemDiv.className = `task-item ${task.status === 'Selesai' ? 'completed' : ''}`;
+
+                    const leftDiv = document.createElement('div');
+                    leftDiv.className = 'task-item-left';
+
+                    const toggleBtn = document.createElement('button');
+                    toggleBtn.type = 'button';
+                    toggleBtn.className = 'status-toggle-btn';
+                    toggleBtn.title = task.status === 'Selesai' ? 'Tandai Belum Selesai' : 'Tandai Selesai';
+                    toggleBtn.innerHTML = '<i class="fas fa-check" style="font-size: 0.7rem;"></i>';
+                    toggleBtn.addEventListener('click', () => toggleTaskStatus(task.id));
+
+                    const detailsDiv = document.createElement('div');
+                    detailsDiv.className = 'task-details';
+
+                    const headerRow = document.createElement('div');
+                    headerRow.className = 'task-header-row';
+
+                    const titleSpan = document.createElement('span');
+                    titleSpan.className = 'task-title-text';
+                    titleSpan.textContent = task.title;
+
+                    const priorityBadge = document.createElement('span');
+                    priorityBadge.className = `badge badge-priority-${task.priority}`;
+                    priorityBadge.textContent = task.priority;
+
+                    const statusBadge = document.createElement('span');
+                    statusBadge.className = `badge ${task.status === 'Selesai' ? 'badge-status-Selesai' : 'badge-status-Belum'}`;
+                    statusBadge.textContent = task.status;
+
+                    headerRow.appendChild(titleSpan);
+                    headerRow.appendChild(priorityBadge);
+                    headerRow.appendChild(statusBadge);
+
+                    const metaDiv = document.createElement('div');
+                    metaDiv.className = 'task-meta';
+
+                    const courseSpan = document.createElement('span');
+                    courseSpan.innerHTML = '<i class="fas fa-book"></i> ';
+                    courseSpan.appendChild(document.createTextNode(task.course));
+
+                    const dateSpan = document.createElement('span');
+                    dateSpan.innerHTML = '<i class="fas fa-calendar-day"></i> Tenggat: ';
+                    dateSpan.appendChild(document.createTextNode(formatTanggalIndo(task.dueDate)));
+
+                    metaDiv.appendChild(courseSpan);
+                    metaDiv.appendChild(dateSpan);
+
+                    detailsDiv.appendChild(headerRow);
+                    detailsDiv.appendChild(metaDiv);
+
+                    if (task.notes && task.notes.trim() !== '') {
+                        const notesDiv = document.createElement('div');
+                        notesDiv.className = 'task-notes-text';
+                        notesDiv.textContent = task.notes;
+                        detailsDiv.appendChild(notesDiv);
+                    }
+
+                    leftDiv.appendChild(toggleBtn);
+                    leftDiv.appendChild(detailsDiv);
+
+                    const actionsDiv = document.createElement('div');
+                    actionsDiv.className = 'task-actions';
+
+                    const editBtn = document.createElement('button');
+                    editBtn.type = 'button';
+                    editBtn.className = 'action-icon-btn edit-btn';
+                    editBtn.title = 'Ubah Tugas';
+                    editBtn.innerHTML = '<i class="fas fa-edit"></i><span class="btn-label">Edit</span>';
+                    editBtn.addEventListener('click', () => startEditTask(task.id));
+
+                    const deleteBtn = document.createElement('button');
+                    deleteBtn.type = 'button';
+                    deleteBtn.className = 'action-icon-btn delete-btn';
+                    deleteBtn.title = 'Hapus Tugas';
+                    deleteBtn.innerHTML = '<i class="fas fa-trash-alt"></i><span class="btn-label">Hapus</span>';
+                    deleteBtn.addEventListener('click', () => openDeleteConfirm(task.id));
+
+                    actionsDiv.appendChild(editBtn);
+                    actionsDiv.appendChild(deleteBtn);
+
+                    itemDiv.appendChild(leftDiv);
+                    itemDiv.appendChild(actionsDiv);
+                    taskListContainer.appendChild(itemDiv);
+                });
+            }
+
+            taskForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const isEdit = Boolean(taskIdInput.value);
+                if (!requireLogin(isEdit ? 'mengubah tugas' : 'menambahkan tugas')) return;
+
+                if (!validateTaskForm()) return;
+
+                const existingId = taskIdInput.value;
+                const taskData = {
+                    id: existingId || 'task-' + Date.now(),
+                    title: taskTitleInput.value.trim(),
+                    course: taskCourseInput.value.trim(),
+                    dueDate: taskDueDateInput.value,
+                    priority: taskPriorityInput.value,
+                    status: taskStatusInput.value,
+                    notes: taskNotesInput.value.trim()
+                };
+
+                if (existingId) {
+                    const index = tasks.findIndex(t => t.id === existingId);
+                    if (index !== -1) {
+                        tasks[index] = taskData;
+                        showPopup('fa-check-circle', 'Perubahan Disimpan!', `Tugas "${taskData.title}" berhasil diperbarui.`, 'icon-success');
+                    }
+                } else {
+                    tasks.unshift(taskData);
+                    showPopup('fa-check-circle', 'Tugas Ditambahkan!', `Tugas "${taskData.title}" berhasil disimpan.`, 'icon-success');
+                }
+
+                saveTasks();
+                resetTaskForm();
+                renderTasks();
+            });
+
+            function startEditTask(id) {
+                if (!requireLogin('mengedit tugas')) return;
+
+                const task = tasks.find(t => t.id === id);
+                if (!task) return;
+
+                clearValidationErrors();
+                taskIdInput.value = task.id;
+                taskTitleInput.value = task.title;
+                taskCourseInput.value = task.course;
+                taskDueDateInput.value = task.dueDate;
+                taskPriorityInput.value = task.priority;
+                taskStatusInput.value = task.status;
+                taskNotesInput.value = task.notes || '';
+
+                formModeTitle.innerHTML = '<i class="fas fa-edit" style="color: #fbbf24;"></i> Ubah Tugas';
+                btnSaveTask.innerHTML = '<i class="fas fa-save"></i> Perbarui';
+                btnCancelEdit.style.display = 'inline-flex';
+
+                taskForm.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                taskTitleInput.focus();
+            }
+
+            btnCancelEdit.addEventListener('click', resetTaskForm);
+
+            function toggleTaskStatus(id) {
+                if (!requireLogin('mengubah status tugas')) return;
+
+                const task = tasks.find(t => t.id === id);
+                if (!task) return;
+
+                task.status = (task.status === 'Selesai') ? 'Belum Selesai' : 'Selesai';
+                saveTasks();
+                renderTasks();
+            }
+
+            function openDeleteConfirm(id) {
+                if (!requireLogin('menghapus tugas')) return;
+
+                const task = tasks.find(t => t.id === id);
+                if (!task) return;
+
+                taskToDeleteId = id;
+                deleteConfirmDesc.textContent = `Apakah Anda yakin ingin menghapus tugas "${task.title}"? Data yang dihapus tidak dapat dikembalikan.`;
+                deleteConfirmModal.classList.add('active');
+            }
+
+            btnCancelDelete.addEventListener('click', () => {
+                taskToDeleteId = null;
+                deleteConfirmModal.classList.remove('active');
+            });
+
+            window.addEventListener('click', (e) => {
+                if (e.target === deleteConfirmModal) {
+                    taskToDeleteId = null;
+                    deleteConfirmModal.classList.remove('active');
+                }
+            });
+
+            btnConfirmDelete.addEventListener('click', () => {
+                if (!requireLogin('menghapus tugas')) return;
+                if (!taskToDeleteId) return;
+
+                const deletedTask = tasks.find(t => t.id === taskToDeleteId);
+                tasks = tasks.filter(t => t.id !== taskToDeleteId);
+
+                if (taskIdInput.value === taskToDeleteId) {
+                    resetTaskForm();
+                }
+
+                saveTasks();
+                renderTasks();
+                deleteConfirmModal.classList.remove('active');
+                taskToDeleteId = null;
+
+                if (deletedTask) {
+                    showPopup('fa-trash-alt', 'Tugas Dihapus', `Tugas "${deletedTask.title}" telah dihapus dari daftar.`, 'icon-logout');
+                }
+            });
+
+            searchTaskInput.addEventListener('input', renderTasks);
+            filterStatusSelect.addEventListener('change', renderTasks);
+            filterPrioritySelect.addEventListener('change', renderTasks);
+
+            updateAuthUI();
+            loadTasks();
+            renderTasks();
+        });
+    </script>
+</body>
+</html>
